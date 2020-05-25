@@ -12,7 +12,26 @@ let tab = tabGroup.addTab({
   src: "page/page.html",
   visible: true,
   webviewAttributes: {
-    nodeIntegration: true,
+    nodeIntegration: true
+  },
+  active : true
+});
+
+function newTabs(){
+    let tabGroup = new TabGroup();
+    let tab = tabGroup.addTab({
+    title: "Electron",
+    src: "page/page.html",
+    visible: true,
+    webviewAttributes: {
+    nodeIntegration: true
   }
 });
+}
+
+
+
+
+//////////////////////////////////////////
+
 

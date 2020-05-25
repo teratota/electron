@@ -5,8 +5,12 @@
 // selectively enable features needed in the rendering
 // process.
 fs = require('fs');
+var nodeConsole = require('console');
+var console = new nodeConsole.Console(process.stdout, process.stderr);
 
-let path = "C:\\";
+let path = "C:\\Users\\thoma\\OneDrive\\Documents";
+
+console.log("dfsc")
 
 viewDir()
 
@@ -71,12 +75,13 @@ function viewDir(){
         }
         let div = ''
         files.forEach(function (name) {
-            div+= '<p><a onclick="goToDir(\'' + name + '\')">' + name + '</a><p>'
+            console.log(name)
+            if(fs.statSync(path+'\\'+name).isFile()){
+                div+= '<p><a onclick="goToDir(\'' + name + '\')">' + name + ' file</a><p>'
+            }else{
+                div+= '<p><a onclick="goToDir(\'' + name + '\')">' + name + ' dir</a><p>'
+            }
         });
         document.getElementById("list").innerHTML = div;
     });
-}
-
-function newWindow(){
-    createWindow()
 }
