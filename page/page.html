@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content=" script-src 'self' 'unsafe-inline'">
     <meta http-equiv="X-Content-Security-Policy" content=" script-src 'self' 'unsafe-inline'">
     <link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css">
+    <title>Hello World!</title>
   </head>
   <body>
     <div class="etabs-tabgroup">
@@ -14,7 +15,20 @@
     </div>
     <div class="etabs-views"></div>
 
+    <label>Rechercher un dossier</label>
+    <input type="text" id='dir' palceholder="Chemin du dossier"/>
+    <button onclick="listeFile()">Valider</button>
+    <button onclick="lastDir()">Last</button>
+
+    <label>Nouveau dossier ou fichier</label>
+    <select id="categorie" onchange="fileOrDir()"> 
+      <option>Dossier</option>
+      <option>Fichier</option>
+    </select>
+    <div id='FormFileOrDir'></div>
+    <div id='list'></div>
+
     <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
+    <script src="../home.js"></script>
   </body>
 </html>
