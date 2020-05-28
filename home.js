@@ -5,6 +5,7 @@
 // selectively enable features needed in the rendering
 // process.
 fs = require('fs');
+fse = require('fs-extra')
 var nodeConsole = require('console');
 var console = new nodeConsole.Console(process.stdout, process.stderr);
 const {shell} = require('electron');
@@ -17,13 +18,11 @@ let numberMax = '';
 
 let listCopy = '';
 
-console.log("dfsc")
 
 viewDir()
 
 function listeFile() {
     let folder = document.getElementById("dir").value;
-    console.log(folder)
     path = folder
     viewDir()
 }
@@ -98,7 +97,6 @@ function openRename(name){
 
 function deleteDir(){
     dir = path+"\\"+name
-    console.log(dir)
     fs.rmdir(dir, { 
         recursive: true, 
       }, (error) => { 
@@ -120,10 +118,7 @@ function deleteFileOrDir(name){
 
 function copy(){
     let listDirOrFile = [];
-    console.log(listDirOrFile)
     let x = 0;
-    console.log(numberMax)
-    //console.log(document.getElementById("selection1").checked);
     for (var i = 1;i <= numberMax; i++){
         if (document.getElementById("selection" + i).checked === true){
             listDirOrFile[x] = path+"\\"+document.getElementById("selection" + i).value;
@@ -134,25 +129,22 @@ function copy(){
     document.getElementById('copier').innerHTML = "";
     document.getElementById('coller').innerHTML = div;
     listCopy = listDirOrFile;
-    console.log(listCopy)
 }
 
 function paste(){
     listCopy.forEach(function (file) {
         folder = file.split("\\")
         destination = path+'\\'+folder[folder.length-1]
-        console.log(destination)
-        console.log(file)
-        fs.copyFile(file, destination, function (err) {
+        fse.copy(file, destination, function (err) {
             if (err){
                 console.log('An error occured while copying the folder.')
                 return console.error(err)
             }
             console.log('Copy completed!')
+            viewDir();
         });
     })
     stop();
-    viewDir();
 }
 
 function stop(){
@@ -171,7 +163,6 @@ function viewDir(){
         let div = ''
         x=1;
         files.forEach(function (name) {
-            console.log(name)
             if(fs.statSync(path+'\\'+name).isFile()){
                 div+= '<tr>'
                 div+= '<td><input type="checkbox" id="selection'+x+'" value=\'' + name+ '\'></td>';
