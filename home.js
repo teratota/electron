@@ -59,8 +59,9 @@ function newFile(){
         }
         console.log('File is created successfully.');
         document.getElementById("FormFileOrDir").innerHTML = '';
+        viewDir();
     });
-    viewDir();
+    
 }
 
 function newDir(){
@@ -72,8 +73,8 @@ function newDir(){
         }
         console.log('Dir is created successfully.');
         document.getElementById("FormFileOrDir").innerHTML = '';
+        viewDir();
     });
-    viewDir();
 }
 
 function renameFileOrDir(name){
@@ -182,6 +183,7 @@ function viewDir(){
         });
         numberMax = x-1;
         document.getElementById("list").innerHTML = div;
+        document.getElementById("dir").value = path;
     });
 }
 
